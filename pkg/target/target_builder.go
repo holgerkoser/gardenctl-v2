@@ -207,8 +207,8 @@ func (b *targetBuilderImpl) completeTargetForShoot(ctx context.Context, t *targe
 
 	if handler := ac.AccessRestrictionHandlerFromContext(ctx); handler != nil {
 		if garden, err := b.config.Garden(t.GardenName()); err == nil {
-			for _, message := range ac.CheckAccessRestrictions(garden.AccessRestrictions, shoot) {
-				handler(message)
+			if !handler(ac.CheckAccessRestrictions(garden.AccessRestrictions, shoot)) {
+				return fmt.Errorf("%w", Aborted)
 			}
 		}
 	}
