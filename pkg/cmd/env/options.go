@@ -54,7 +54,7 @@ func (o *options) Complete(f util.Factory, cmd *cobra.Command, args []string) er
 	o.Shell = cmd.Name()
 	o.CmdPath = cmd.Parent().CommandPath()
 	o.GardenDir = f.GardenHomeDir()
-	o.Template = newTemplate("usage-hint")
+	o.Template = newTemplate("helpers")
 
 	switch o.ProviderType {
 	case "kubernetes":
