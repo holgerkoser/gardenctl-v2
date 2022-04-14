@@ -181,9 +181,8 @@ func (b *targetBuilderImpl) SetControlPlane(ctx context.Context) TargetBuilder {
 			return ErrNoGardenTargeted
 		}
 
-		err := b.completeTargetForShoot(ctx, t, t.Shoot)
-		if err != nil {
-			return err
+		if t.Shoot == "" {
+			return ErrNoShootTargeted
 		}
 
 		t.ControlPlaneFlag = true
